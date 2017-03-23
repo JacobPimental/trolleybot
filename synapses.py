@@ -13,4 +13,4 @@ class Synapse:
         self.end.retrieve_data( new_data )
 
     def __repr__(self):
-        return "Synapse:\n\tWeight: " + str(self.weight) + "\n\tStart: " + repr(self.start) + "\n\tEnd: " + repr(self.end) 
+        return "Synapse:\n\tWeight: " + str(self.weight) +  "\n\tEnd: " + repr(self.end) 
