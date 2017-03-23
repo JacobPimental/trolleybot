@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 from hidden_node import *
+from synapses import *
 import random
 
 class HiddenLayer:
@@ -15,24 +17,29 @@ class HiddenLayer:
         self.endNode = endNode
         self.act_func = act_func
         self.nextLayer = nextLayer
-        
-        init_nodes()
+        self.init_nodes()
 
     def init_nodes(self):
         for i in range( 0, self.numNodes ):
-            myNodes.append( HiddenNode( formulate_synapses(), self.act_func) )
+            self.myNodes.append( HiddenNode( self.formulate_synapses(), self.act_func) )
 
     def send_data(self):
-        for n in myNodes:
-            n.pass_through
+        for n in self.myNodes:
+            n.pass_through()
 
     def formulate_synapses(self):
         lst = []
-        if not nextLayer == None:
-            for n in nextLayer.myNodes:
-                lst.append( Synapse( random.random(), n )
+        if not self.nextLayer == None:
+            for n in self.nextLayer.myNodes:
+                lst.append( Synapse( random.random(), n ) )
 
+        else:
+            lst.append( Synapse( random.random(), self.endNode ) )
 
+        return lst
 
+    def list_nodes(self):
+        for n in self.myNodes:
+            print( n )
 
 

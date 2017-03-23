@@ -3,6 +3,9 @@
 from synapses import *
 from hidden_node import *
 from output_node import *
+from hidden_layer import *
+from input_layer import *
+import random
 import math
 
 class InputNode:
@@ -31,28 +34,22 @@ class InputNode:
 
 
 def act_func( data ):
-    print( "Using activation function on " + str( data ) )
     ans = float( 1/(1 + math.pow(math.e, -data) ) )
-    print( "Got: " + str(ans) )
     return ans
 
 if __name__ == "__main__":
-    mysynapses = []
-    mysynapses.append( Synapse( 0.02 ) )
-    mysynapses.append( Synapse( 0.03 ) )
-    
-    mysynapses2 = []
-    mysynapses2.append( Synapse( 0.03 ) )
- 
-    input_node = InputNode( 1, mysynapses )
-    output_node = OutputNode( mysynapses2, act_func )
-    hidden_node = HiddenNode( mysynapses, mysynapses2, act_func, output_node )
-    
 
-    input_node.calculate()
-    hidden_node.pass_through()
-    
-    print( output_node )
+    endNode = OutputNode(act_func)
+    hiddenLayer = HiddenLayer( 1, act_func, endNode, None )
+    inputLayer = InputLayer( [23, 32], 2, hiddenLayer)
+
+    inputLayer.list_nodes()
+    inputLayer.send_data()
+
+    hiddenLayer.list_nodes()
+    hiddenLayer.send_data()
+
+    print( endNode )
 
 
 

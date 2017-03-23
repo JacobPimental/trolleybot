@@ -18,4 +18,4 @@ class HiddenNode:
             s.pass_data( self.act_data )
 
     def __repr__(self):
-        return "Hidden Node:\n\tData: " + str(self.act_data) + "\n\tSynapses " + str(self.synapses1) + " " + str(self.synapses2)
+        return "Hidden Node:\n\tData: " + str(self.act_data) + "\n\tSynapses " + str(self.synapses)
