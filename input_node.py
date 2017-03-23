@@ -2,6 +2,7 @@
 
 from synapses import *
 from hidden_node import *
+from output_node import *
 import math
 
 class InputNode:
@@ -41,12 +42,17 @@ if __name__ == "__main__":
     mysynapses.append( Synapse( 0.03 ) )
     
     mysynapses2 = []
+    mysynapses2.append( Synapse( 0.03 ) )
  
     input_node = InputNode( 1, mysynapses )
-    hidden_node = HiddenNode( mysynapses, mysynapses2, act_func )
-    input_node.calculate()
+    output_node = OutputNode( mysynapses2, act_func )
+    hidden_node = HiddenNode( mysynapses, mysynapses2, act_func, output_node )
     
-    print( input_node )
+
+    input_node.calculate()
+    hidden_node.pass_through()
+    
+    print( output_node )
 
 
 

@@ -1,8 +1,9 @@
-class HiddenNode:
-    
+#!/usr/bin/python3 
+
+class OutputNode:
     synapses = []
-    act_func = None
     data = 0.0
+    act_func = None
     act_data = 0.0
 
     def __init__(self, synapses, act_func):
@@ -13,9 +14,5 @@ class HiddenNode:
         self.data += data
         self.act_data = self.act_func( self.data )
 
-    def pass_through(self):
-        for s in self.synapses:
-            s.pass_data( self.act_data )
-
     def __repr__(self):
-        return "Hidden Node:\n\tData: " + str(self.act_data) + "\n\tSynapses " + str(self.synapses1) + " " + str(self.synapses2)
+        return "Output Node:\n\tData: " + str(self.data)

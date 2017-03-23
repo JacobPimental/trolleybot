@@ -1,12 +1,12 @@
 #!/usr/bin/python3 
 
 class Synapse:
-    start = None
     end = None
     weight = 0
 
-    def __init__(self, weight):
+    def __init__(self, weight, end):
         self.weight = weight
+        self.end = end
 
     def pass_data(self, data ):
         new_data = data * self.weight
