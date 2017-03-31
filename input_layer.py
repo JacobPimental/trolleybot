@@ -9,9 +9,9 @@ class InputLayer:
     numNodes = 0
     nextLayer = None
 
-    def __init__(self, data, numNodes, nextLayer):
+    def __init__(self, data, nextLayer):
         self.myData = data
-        self.numNodes = numNodes
+        self.numNodes = len( data ) 
         self.nextLayer = nextLayer
         self.init_nodes()
 
@@ -33,4 +33,11 @@ class InputLayer:
     def list_nodes(self):
         for n in self.myNodes:
             print( n )
+
+    def backProp( self, deltaSum ):
+        for s in self.myNodes:
+            lst = []
+            for n in self.nextLayer.myNodes:
+                lst.append( deltaSum * n.act_data )
+            s.updateSynapses( lst )
 

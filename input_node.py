@@ -32,16 +32,26 @@ class InputNode:
     def __str__(self):
         return "Input Node:\n\tData: " + str(self.data) + "\n\tSynapses: " + str(self.synapses)
 
+    def updateSynapses( self, delta ):
+        for s in range( len( delta ) ):
+            self.synapses[s] += delta[s]
+
 
 def act_func( data ):
     ans = float( 1/(1 + math.pow(math.e, -data) ) )
     return ans
 
+def deriv_act_func( data ):
+    ans = float( math.pow(math.e, x) / math.pow( math.pow(math.e, data) + 1, 2 ) )
+    return ans
+
 if __name__ == "__main__":
 
+    expected = 0
+    weights = [[0.23]]
     endNode = OutputNode(act_func)
-    hiddenLayer = HiddenLayer( 1, act_func, endNode, None )
-    inputLayer = InputLayer( [23, 32], 2, hiddenLayer)
+    hiddenLayer = HiddenLayer( 1, act_func, endNode, None, weights )
+    inputLayer = InputLayer( [23, 32], hiddenLayer)
 
     inputLayer.list_nodes()
     inputLayer.send_data()
@@ -50,6 +60,11 @@ if __name__ == "__main__":
     hiddenLayer.send_data()
 
     print( endNode )
+
+    error = endNode.data - expected
+    deltaSum = deriv_act_func( endNode.data ) * error 
+
+
 
 
 
