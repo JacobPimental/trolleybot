@@ -34,7 +34,7 @@ class InputNode:
 
     def updateSynapses( self, delta ):
         for s in range( len( delta ) ):
-            self.synapses[s] += delta[s]
+            self.synapses[s].weight += delta[s]
 
 
 def act_func( data ):
@@ -42,7 +42,7 @@ def act_func( data ):
     return ans
 
 def deriv_act_func( data ):
-    ans = float( math.pow(math.e, x) / math.pow( math.pow(math.e, data) + 1, 2 ) )
+    ans = float( math.pow(math.e, data) / math.pow( math.pow(math.e, data) + 1, 2 ) )
     return ans
 
 if __name__ == "__main__":
@@ -62,13 +62,11 @@ if __name__ == "__main__":
     print( endNode )
 
     error = endNode.data - expected
-    deltaSum = deriv_act_func( endNode.data ) * error 
+    deltaSum = deriv_act_func( endNode.data ) * error
 
-
-
-
-
-
-
-
-
+    inputLayer.backProp( deltaSum )
+    hiddenLayer.backProp( deltaSum )
+    
+    inputLayer.list_nodes()
+    hiddenLayer.list_nodes()
+    

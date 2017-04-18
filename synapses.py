@@ -9,7 +9,7 @@ class Synapse:
         self.end = end
 
     def pass_data(self, data ):
-        new_data = data * self.weight
+        new_data = float(data) * self.weight
         self.end.retrieve_data( new_data )
 
     def __repr__(self):

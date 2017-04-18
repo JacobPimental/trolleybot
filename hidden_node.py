@@ -19,3 +19,7 @@ class HiddenNode:
 
     def __repr__(self):
         return "Hidden Node:\n\tData: " + str(self.act_data) + "\n\tSynapses " + str(self.synapses)
+
+    def updateSynapses(self, delta):
+        for s in range( len( delta ) ):
+            self.synapses[s].weight += delta[s]

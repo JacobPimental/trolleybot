@@ -31,7 +31,6 @@ class HiddenLayer:
 
     def formulate_synapses(self, curNode):
         lst = []
-        print( str( self.weights ) + " " + str( curNode ) )
         if not self.nextLayer == None:
             for n in range(0, len(self.nextLayer.myNodes)):
                 if len( self.weights ) == 0:
@@ -43,12 +42,23 @@ class HiddenLayer:
             if len( self.weights ) == 0:
                 lst.append( Synapse( random.random(), self.endNode ) )
             else:
-                lst.append( Synapse( self.weights[curNode][0], self.endNode ) )
+                lst.append( Synapse( self.weights[curNode], self.endNode ) )
 
         return lst
 
     def list_nodes(self):
         for n in self.myNodes:
             print( n )
+
+    def backProp( self, deltaSum ):
+        for s in self.myNodes:
+            lst = []
+            if self.nextLayer != None:
+                for n in self.nextLayer.myNodes:
+                    lst.append( deltaSum * n.act_data )
+            else:
+                lst.append( deltaSum * self.endNode.act_data )
+
+            s.updateSynapses( lst )
 
 
