@@ -37,14 +37,6 @@ class InputNode:
             self.synapses[s].weight += delta[s]
 
 
-def act_func( data ):
-    ans = float( 1/(1 + math.pow(math.e, -data) ) )
-    return ans
-
-def deriv_act_func( data ):
-    ans = float( math.pow(math.e, data) / math.pow( math.pow(math.e, data) + 1, 2 ) )
-    return ans
-
 if __name__ == "__main__":
 
     expected = 0

@@ -21,6 +21,11 @@ class HiddenLayer:
         self.nextLayer = nextLayer
         self.init_nodes()
 
+    def reset( self ):
+        for n in self.myNodes:
+            n.data = 0.0
+            n.act_data = 0.0
+
     def init_nodes(self):
         for i in range( 0, self.numNodes ):
             self.myNodes.append( HiddenNode( self.formulate_synapses(i), self.act_func) )
@@ -36,7 +41,7 @@ class HiddenLayer:
                 if len( self.weights ) == 0:
                     lst.append( Synapse( random.random(), self.nextLayer.myNodes[n] ) )
                 else:
-                    lst.append( Synapse( self.weights[curNode][n], self.nextLayer.myNodes[n] ) )
+                    lst.append( Synapse( self.weights[n], self.nextLayer.myNodes[n] ) )
         
         else:
             if len( self.weights ) == 0:
@@ -55,9 +60,9 @@ class HiddenLayer:
             lst = []
             if self.nextLayer != None:
                 for n in self.nextLayer.myNodes:
-                    lst.append( deltaSum * n.act_data )
+                    lst.append( deltaSum * s.act_data )
             else:
-                lst.append( deltaSum * self.endNode.act_data )
+                lst.append( deltaSum * s.act_data )
 
             s.updateSynapses( lst )
 

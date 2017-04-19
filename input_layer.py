@@ -45,6 +45,6 @@ class InputLayer:
         for s in self.myNodes:
             lst = []
             for n in self.nextLayer.myNodes:
-                lst.append( deltaSum * n.act_data )
+                lst.append( deltaSum * float(s.data) )
             s.updateSynapses( lst )
 

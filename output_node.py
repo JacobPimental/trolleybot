@@ -8,6 +8,10 @@ class OutputNode:
     def __init__(self, act_func):
         self.act_func = act_func
 
+    def reset( self ):
+        self.data = 0.0
+        self. act_data = 0.0
+
     def retrieve_data(self, data):
         self.data += data
         self.act_data = self.act_func( self.data )
